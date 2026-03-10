@@ -1,6 +1,15 @@
 const rateLimit = require('express-rate-limit');
-const { ipKeyGenerator } = require('express-rate-limit');
 const { logger } = require('./loggerMiddleware');
+
+// Custom key generator for IPv6 support
+const ipKeyGenerator = (req) => {
+  // Handle IPv6-mapped IPv4 addresses
+  let ip = req.ip;
+  if (ip && ip.startsWith('::ffff:')) {
+    ip = ip.substring(7);
+  }
+  return ip || 'unknown';
+};
 
 // General API rate limiter (100 requests per 15 minutes)
 const generalLimiter = rateLimit({

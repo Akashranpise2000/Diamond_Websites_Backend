@@ -1,0 +1,42 @@
+# Render Blueprint Configuration for Diamond House Cleaning API
+# This file defines the backend service for Render deployment
+
+services:
+  - type: web
+    name: diamond-house-cleaning-api
+    env: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false # Set this in Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set this in Render dashboard - generate a secure random string
+      - key: JWT_REFRESH_SECRET
+        sync: false # Set this in Render dashboard - generate a secure random string
+      - key: JWT_EXPIRE
+        value: 24h
+      - key: JWT_REFRESH_EXPIRE
+        value: 7d
+      # Optional - set these in Render dashboard if using payment/sms features
+      # - key: RAZORPAY_KEY_ID
+      #   sync: false
+      # - key: RAZORPAY_KEY_SECRET
+      #   sync: false
+      # - key: EMAIL_USER
+      #   sync: false
+      # - key: EMAIL_PASS
+      #   sync: false
+      # - key: TWILIO_ACCOUNT_SID
+      #   sync: false
+      # - key: TWILIO_AUTH_TOKEN
+      #   sync: false
+      # - key: TWILIO_PHONE_NUMBER
+      #   sync: false
+    autoDeploy: true
+    healthCheckPath: /api/v1/health
