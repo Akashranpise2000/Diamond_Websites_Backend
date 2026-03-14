@@ -7,7 +7,7 @@ services:
     env: node
     region: oregon
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
@@ -23,6 +23,10 @@ services:
         value: 24h
       - key: JWT_REFRESH_EXPIRE
         value: 7d
+      - key: CLIENT_URL
+        sync: false # Set to your frontend URL in Render dashboard
+      - key: FRONTEND_URL
+        sync: false # Set to your frontend URL in Render dashboard
       # Optional - set these in Render dashboard if using payment/sms features
       # - key: RAZORPAY_KEY_ID
       #   sync: false

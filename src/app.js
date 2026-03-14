@@ -69,13 +69,24 @@ const corsOptions = {
       'http://localhost:3001',
       'http://127.0.0.1:3000',
       'http://127.0.0.1:3001',
-      process.env.CLIENT_URL
+      process.env.CLIENT_URL,
+      // Add common production URLs
+      process.env.FRONTEND_URL,
+      'https://diamond-house-cleaning.onrender.com',
+      'https://diamond-house-cleaning-frontend.onrender.com'
     ].filter(Boolean);
     
+    // In production, allow if origin matches or no origin (postman, etc.)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(null, true); // Allow all origins in production for now
+      // For production, allow all origins to avoid CORS issues
+      // In production, you should configure this properly
+      if (process.env.NODE_ENV === 'production') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
     }
   },
   credentials: true,
