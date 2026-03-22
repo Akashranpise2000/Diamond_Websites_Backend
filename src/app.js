@@ -156,6 +156,11 @@ app.use(morganMiddleware);
 app.use(customLogger);
 
 // API routes
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
+// API v1 routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users/profile', profileRoutes);
 app.use('/api/v1/users', userRoutes);
