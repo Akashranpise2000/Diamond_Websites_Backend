@@ -73,7 +73,12 @@ const corsOptions = {
       // Add common production URLs
       process.env.FRONTEND_URL,
       'https://diamond-house-cleaning.onrender.com',
-      'https://diamond-house-cleaning-frontend.onrender.com'
+      'https://diamond-websites-backend-2.onrender.com',
+      'https://diamond-house-cleaning-frontend.onrender.com',
+      // Vercel frontend URLs
+      'https://diamond-house-cleaning.vercel.app',
+      'https://diamond-house-cleaning-git-main.vercel.app',
+      'https://diamond-house-cleaning-git-develop.vercel.app'
     ].filter(Boolean);
     
     // In production, allow if origin matches or no origin (postman, etc.)
